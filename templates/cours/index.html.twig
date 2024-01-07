@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cours index{% endblock %}
+
+{% block body %}
+<section class="scroll-section" id="title">
+  <div class="page-title-container">
+    <h1 class="mb-0 pb-0 display-4">Cours</h1>
+    <nav class="breadcrumb-container d-inline-block" aria-label="breadcrumb">
+      <ul class="breadcrumb pt-0">
+        <li class="breadcrumb-item"><a href="{{path('app_front')}}">Home</a></li>
+       
+
+      </ul>
+    </nav>
+    
+  </div>
+</section>
+    
+  
+    <table class="table">
+        <thead>
+            <tr>
+                
+                <th>Titre_cours</th>
+                <th>Image</th>
+                <th>Enseignant</th>
+                <th>Categorie</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for cour in cours %}
+            <tr>
+                
+                <td>{{ cour.titreCours }}</td>
+                <td>
+                <img id="image" src="{{ asset('img/course/small/'~ cour.image) }}"  
+                            class="card-img card-img-horizontal-lg sh-18 sw-lg-16 h-lg-100">  </td>
+                <td>{{ cour.idEnseignant }}</td>
+                <td>{{ cour.idCategorie }}</td>
+                <td>
+     
+                    <a 
+                    href="{{ path('app_cours_edit', {'id': cour.id}) }}" 
+                     class="btn btn-icon btn-icon-only btn-outline-secondary mb-1" >
+                     <i class="bi bi-pencil-square"></i>
+                    </a>
+                    
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    
+                    <a 
+                    href="{{ path('app_cours_new') }}"  title="Ajouter"
+                     class="btn btn-icon btn-icon-only btn-outline-secondary mb-1" >
+                     <i class="bi bi-plus"></i>
+                    </a>
+
+
+            
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+    
+{% endblock %}

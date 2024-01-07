@@ -1,0 +1,199 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Enseignant{% endblock %}
+
+{% block body %}
+
+<!-- Title Start -->
+<section class="scroll-section" id="title">
+  <div class="page-title-container">
+    <h1 class="mb-0 pb-0 display-4">Enseignant</h1>
+    <nav class="breadcrumb-container d-inline-block" aria-label="breadcrumb">
+      <ul class="breadcrumb pt-0">
+        <li class="breadcrumb-item"><a href="{{path('app_front')}}">Home</a></li>
+       
+
+      </ul>
+    </nav>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-icon btn-icon-only btn-outline-secondary mb-1" data-bs-toggle="modal"
+        data-bs-target="#exampleModal"title="Ajouter">
+        <i data-acorn-icon="plus"></i>
+      </button>
+    </div>
+  </div>
+</section>
+<!-- Title End -->
+
+
+<section class="scroll-section" id="stripedRows">
+
+  <div class="card mb-5">
+    <div class="card-body">
+
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Email</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Prenom</th>
+            <th scope="col">Image</th>
+            <th scope="col">Action</th>
+
+
+          </tr>
+        </thead>
+        <tbody>
+         {%for enseignant in  allenseignant %}
+          <tr>
+            
+            <th>{{enseignant.email}}</th>
+            <th>{{enseignant.nom}}</th>
+            <th>{{enseignant.prenom}}</th>        
+          <th>
+            <img id="img" src="{{ asset('img/course/small/'~ enseignant.image) }}" alt="course" class="card-img card-img-horizontal-lg sh-18 sw-lg-16 h-lg-100">
+            </th>
+            
+             <td>
+               <button onclick="modalUpdate({{enseignant.id }})"
+                class="btn btn-icon btn-icon-only btn-outline-secondary mb-1" data-bs-toggle="modal"
+                data-bs-target="#edit" title="Modifier">
+                <i class="bi bi-pencil-square"></i>
+              </button>
+              <a href="{{ path('delete_enseignant', {'id': enseignant.id}) }}" class="btn btn-icon btn-icon-only btn-outline-secondary mb-1" 
+          title="supprimer"><i class="bi bi-trash"></i>
+          </a>
+            </td>
+             
+            
+         
+         
+      
+      </td>
+          </tr>
+    
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<script>
+ 
+   function modalUpdate(id){
+    /* récuperation des données du forum séléctioné via axios */
+        axios.get("getInfoEnseignant/"+id).then(function (res) {
+          /* attribution des données dans les champs approprié */
+            let data = res.data
+            $("#id").val(data.id)
+            $("#email").val(data.email)
+            $("#nom").val(data.nom)
+            $("#prenom").val(data.prenom)
+            $("#image").val(data.image)
+           
+        })
+        .catch(function (error) {
+            console.log("errr")
+            //console.log(error.request.message)
+        })
+    }
+
+ function doUpdate() {
+    let verified
+    $("#verified").val() == "true" ? verified = true : verified = false
+    // on selectionne les nouvelles valeurs et en evoie ces nouveaux données a la fct codeEdit pour faire la mise a jour
+    let form = {
+      "id": $("#id").val(),
+      "email": $("#email").val(),
+      "nom": $("#nom").val(),
+      "prenom": $("#prenom").val(),
+      "image": $("#image").val(),
+ 
+    }
+    /* récuperation des données */
+    axios.post("codeEditEnseignant", form).then(function (res) {
+        alert("success")
+      })
+      .catch(function (error) {
+        alert("error")
+      })
+  }
+          
+</script>
+
+
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+  crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.min.js"
+  integrity="sha512-bPh3uwgU5qEMipS/VOmRqynnMXGGSRv+72H/N260MQeXZIK4PG48401Bsby9Nq5P5fz7hy5UGNmC/W1Z51h2GQ=="
+  crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<!-- modal edit -->
+
+
+<div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+
+      <div class="modal-body">
+        <input type="hidden" id="id">
+        email:<input type="email" id="email" class="form-control"><br>
+        password:<input type="password" id="password" class="form-control"><br>
+        nom:<input type="text" id="nom" class="form-control"><br>
+        prenom:<input type="text" id="prenom" class="form-control"><br>
+        image:<input type="image" id="image" class="form-control"><br>
+  <img id="img" src=`img/course/small/${value.val}` alt="course" class="card-img card-img-horizontal-lg sh-18 sw-lg-16 h-lg-100">
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="doUpdate()">enregistrer</button>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+<!-- Modal add -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>{{ form_start(form ) }}
+      <div class="modal-body">
+
+        {{ form_row(form.email,{'attr':{'class':'form-control'}}) }}
+        {{ form_row(form.password,{'attr':{'class':'form-control'}}) }}
+        {{ form_row(form.nom,{'attr':{'class':'form-control'}}) }}
+        {{ form_row(form.prenom,{'attr':{'class':'form-control'}}) }}
+        {{ form_row(form.image,{'attr':{'class':'form-control'}}) }}
+             
+      </div>
+      <div class="modal-footer">
+              
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+      {{ form_end(form ) }}
+    </div>
+  </div>
+</div>
+</div>
+
+   
+{% endblock %}

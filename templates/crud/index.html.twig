@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<div class="menu-container flex-grow-1">
+            <ul id="menu" class="menu">
+             
+              <li>
+                <a href="{{path('app_user')}}">
+                  <i data-acorn-icon="quiz" class="icon" data-acorn-size="18"></i>
+                  <span class="label">CRUD user</span>
+                </a>
+                </li>
+                 <li>
+                <a href="{{path('app_apprenant')}}">
+                  <i data-acorn-icon="quiz" class="icon" data-acorn-size="18"></i>
+                  <span class="label">CRUD apprenant</span>
+                </a>
+                </li>
+                 <li>
+                <a href="{{path('app_enseignant')}}">
+                  <i data-acorn-icon="quiz" class="icon" data-acorn-size="18"></i>
+                  <span class="label">CRUD enseignant</span>
+                </a>
+                </li>
+                 <li>
+                <a href="{{path('app_cours_index')}}">
+                  <i data-acorn-icon="quiz" class="icon" data-acorn-size="18"></i>
+                  <span class="label">CRUD cours</span>
+                </a>
+                </li>
+
+
+{#                <li>#}
+{#                <a href="{{path('app_question')}}">#}
+{#                  <i data-acorn-icon="quiz" class="icon" data-acorn-size="18"></i>#}
+{#                  <span class="label">CRUD question</span>#}
+{#                </a>#}
+{#                </li>#}
+{#                <li>#}
+{#                <a href="{{path('app_reponse')}}">#}
+{#                  <i data-acorn-icon="quiz" class="icon" data-acorn-size="18"></i>#}
+{#                  <span class="label">CRUD reponse</span>#}
+{#                </a>#}
+{#                </li>#}
+                <li>
+                <a href="{{path('app_categorie')}}">
+                  <i data-acorn-icon="quiz" class="icon" data-acorn-size="18"></i>
+                  <span class="label">CRUD categorie</span>
+                </a>
+                </li>
+          </ul>
+
+          
+          </div>
+          <!-- Menu End -->
+
+
+{% endblock %}

@@ -1,0 +1,67 @@
+
+{% block title %}Cours{% endblock %}
+
+{% block body %}
+    
+       <main>
+        <div class="container">
+          <!-- Title and Top Buttons Start -->
+          <div class="page-title-container">
+            <div class="row">
+              <!-- Title Start -->
+              <div class="col-12 col-md-7">
+                <h1 class="mb-0 pb-0 display-4" id="title">Course Explore</h1>
+                <nav class="breadcrumb-container d-inline-block" aria-label="breadcrumb">
+                  <ul class="breadcrumb pt-0">
+                    <li class="breadcrumb-item"><a href="{{path ('app_profil')}}">Home</a></li>
+                  </ul>
+                </nav>
+              </div>
+              <!-- Title End -->
+            </div>
+          </div>
+          <!-- Title and Top Buttons End -->
+
+          <!-- Content Start -->
+
+          <!-- Popular Start -->
+          <div class="d-flex justify-content-between">
+            <h2 class="small-title">Popular</h2>
+            <div class="mt-n1">
+              <button class="btn btn-icon btn-icon-end btn-background pe-0 pt-0" type="button">
+                <span>View All</span>
+                <i data-acorn-icon="chevron-right"></i>
+              </button>
+            </div>
+          </div>
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-3 mb-5">
+          {% for cour in cours %}
+            <div class="col">
+              <div class="card h-100">
+                <img src="{{ asset('img/course/small/'~ cour.image) }}" class="card-img-top sh-22" alt="card image" />
+                <div class="card-body">
+                  <h5 class="heading mb-0"><a href="{{ path('app_cours_details', {'id': cour.id}) }}" class="body-link stretched-link">{{cour.titreCours}}</a></h5>
+                </div>
+                <div class="card-footer border-0 pt-0">
+                  <div class="mb-2">
+                    
+                  </div>
+                  <div class="card-text mb-0">
+                    <div> <p>Price : </p>$ {{cour.prix}}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+            
+          </div>
+          <!-- Popular End -->
+
+          
+
+          
+
+          <!-- Content End -->
+        </div>
+      </main>
+{% endblock %}

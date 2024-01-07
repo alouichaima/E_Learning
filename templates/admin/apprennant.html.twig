@@ -1,0 +1,126 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des apprennants{% endblock %}
+
+{% block body %}
+    <h1>Liste des apprennants</h1>
+
+
+<!-- Title Start -->
+<section class="scroll-section" id="title">
+  <div class="page-title-container">
+    <h1 class="mb-0 pb-0 display-4">Apprennant</h1>
+    <nav class="breadcrumb-container d-inline-block" aria-label="breadcrumb">
+      <ul class="breadcrumb pt-0">
+        <li class="breadcrumb-item"><a href="Dashboards.Default.html">Home</a></li>
+        <li class="breadcrumb-item"><a href="Interface.html">Interface</a></li>
+        <li class="breadcrumb-item"><a href="Interface.Components.html">Components</a></li>
+
+      </ul>
+    </nav>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-icon btn-icon-only btn-outline-secondary mb-1" data-bs-toggle="modal"
+        data-bs-target="#exampleModal"title="Ajouter">
+        <i data-acorn-icon="plus"></i>
+      </button>
+    </div>
+  </div>
+</section>
+<!-- Title End -->
+
+
+<section class="scroll-section" id="stripedRows">
+
+  <div class="card mb-5">
+    <div class="card-body">
+
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Email</th>
+            <th scope="col">Rôles</th>
+            <th scope="col">Password</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Prénom</th>
+            <th scope="col">Panier</th>
+            <th scope="col">Classe</th>
+            <th scope="col">Actions</th>
+
+
+          </tr>
+        </thead>
+         <tbody>
+          {%for apprennant in  Allapprennant%}
+          <tr>
+            <th>{{apprennant.id}}</th>
+            <td>{{apprennant.email}}</td>
+            <td> {# On boucle sur les rôles #}
+                        {% for role in apprennant.roles %}
+                            {% if role == "ROLE_USER" %}
+                                Utilisateur
+                            {% elseif role == "ROLE_EDITOR" %}
+                                Editeur
+                            {% elseif role == "ROLE_ADMIN" %}
+                                Administrateur
+                            {% endif %}
+                        {% endfor %}</td>
+            <td>{{apprennant.nom}}</td>
+            <td>{{apprennant.password}}</td>
+             <td>{{apprennant.prenom}}</td>
+             <td>
+               <button onclick="modalUpdate({{apprennant.id }})"
+                class="btn btn-icon btn-icon-only btn-outline-secondary mb-1" data-bs-toggle="modal"
+                data-bs-target="#edit" title="Modifier">
+                <i class="bi bi-pencil-square"></i>
+              </button>
+               <a href="{{ path('delete', {'id': apprennant.id}) }}" class="btn btn-icon btn-icon-only btn-outline-secondary mb-1" 
+          title="supprimer"><i class="bi bi-trash"></i>
+          </a>
+            </td>
+          
+          </tr>
+
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- Modal add -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>{{ form_start(form ) }}
+      <div class="modal-body">
+
+        {{ form_row(form.nom,{'attr':{'class':'form-control'}}) }}
+         {{ form_row(form.email,{'attr':{'class':'form-control'}}) }}
+        {{ form_row(form.prenom,{'attr':{'class':'form-control'}}) }}
+        {{ form_row(form.password,{'attr':{'class':'form-control'}}) }}
+        {{ form_row(form.roles,{'attr':{'class':'form-control'}}) }}
+
+
+
+
+             
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+      {{ form_end(form ) }}
+    </div>
+  </div>
+  </div>
+</div>
+
+
+
+{% endblock %}

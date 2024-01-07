@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminController!{% endblock %}
+
+{% block body %}
+
+
+     
+
+<table class="table align-middle mb-0 bg-white">
+  <thead class="bg-light">
+    <tr>
+      <th>CRUD des differentes entitées</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+      <tr>
+      <td>
+         <a href="{{path ('app_user')}}">
+                      <span class="label">Gestion utilisateurs</span>
+                    </a>
+      </td>
+      </tr>
+      <tr>
+      <td>
+        <a href="{{path ('app_enseignant')}}">
+                      <span class="label">Gestion enseignants</span>
+                    </a>
+      </td>
+      </tr>
+      <tr>
+      <td>
+      <a href="{{path ('app_apprenant')}}">
+                      <span class="label">Gestion apprenants</span>
+                    </a>
+      </td>
+      </tr>
+      <tr>
+      <td>
+        <a href="{{path ('app_classe_index')}}">
+                      <span class="label">Gestion classes</span>
+                    </a>
+      </td>
+      </tr>
+      <tr>
+      <td>
+        <a href="{{path ('app_cours_index')}}">
+                      <span class="label">Gestion cours</span>
+                    </a>
+      </td>
+      </tr>
+      <tr>
+      <td>
+                    <a href="{{path ('app_categorie')}}">
+                      <span class="label">Gestion categorie</span>
+                    </a>
+      </td>
+      </tr>
+      <tr>
+      <td>
+                    <a href="{{path ('app_lesson_index')}}">
+                      <span class="label">Gestion lessons</span>
+                    </a>
+      </td>
+      </tr>
+      <tr>
+      <td>
+                    <a href="">
+                      <span class="label">Gestion devoirs</span>
+                    </a>
+      </td>
+      </tr>
+      <tr>
+      <td>
+                    <a href="">
+                      <span class="label">Gestion des chapitres</span>
+                    </a>
+      </td>
+      </tr>
+    
+    
+    
+  </tbody>
+</table>
+{% endblock %}

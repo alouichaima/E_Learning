@@ -1,0 +1,39 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Lesson{% endblock %}
+
+{% block body %}
+    <h1>Edit Lesson</h1>
+                 {{ form_start(form) }}
+                    {{ form_errors(form) }}
+
+                    {{ form_row(form.nom) }}
+                    {{form_row(form.image,{ 'attr': {'onchange': 'file_changed()'} } )}}
+            
+
+                    <img id="img" src="{{ asset('img/course/small/'~ lesson.image) }}" alt="course" class="card-img card-img-horizontal-lg sh-18 sw-lg-16 h-lg-100">
+
+                    {{ form_row(form.id_cours) }}
+        
+                {{ include('classe/_form.html.twig', {'button_label': 'Update'}) }}
+        
+                {{ form_end(form) }}
+
+<script>
+
+function file_changed(){
+    var selectedFile = document.getElementById('lesson_image').files[0];
+  var img = document.getElementById('img')
+
+  var reader = new FileReader();
+  reader.onload = function(){
+  img.src = this.result}
+  reader.readAsDataURL(selectedFile);
+ }
+
+</script>
+     
+    
+{% endblock %}
+

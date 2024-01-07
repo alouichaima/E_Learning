@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Lesson{% endblock %}
+
+{% block body %}
+    <h1>Lesson</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ lesson.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ lesson.nom }}</td>
+            </tr>
+           
+            <tr>
+                <th>Image</th>
+                <td><img id="image" src="{{ asset('img/course/small/'~ lesson.image) }}"  
+                            class="card-img card-img-horizontal-lg sh-18 sw-lg-16 h-lg-100"></td>
+            </tr>
+            <tr>
+            <th>Cours</th>
+            <td>{{ lesson.idCours }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_lesson_index') }}">back to list</a>
+
+    <a href="{{ path('app_lesson_edit', {'id': lesson.id}) }}">edit</a>
+
+    {{ include('lesson/_delete_form.html.twig') }}
+{% endblock %}
